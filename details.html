@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="https://kit.fontawesome.com/4326f6cda5.js"></script>
+
+	<title>Details</title>
+</head>
+<body>
+
+	<header>
+		<div class="container" id="header-wrap">
+
+			<div id="header-left">
+				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
+				<nav id="top-menu">
+					<ul>
+						<li><a href="index.html#clothes-heading">Clothing</a></li>
+						<li><a href="index.html#accessories-heading">Accessories</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div id="header-right">
+				<form>
+					<i class="fas fa-search"></i>
+					<input type="search" name="search" placeholder="Search for Clothing and Accessories">
+				</form>
+				<div id="card">
+					<a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
+					<img id="avatar" src="img/avatar.jpg">
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+
+		<div class="container" id="details">
+			<div id="left"></div>
+			<div id="right"></div>
+		</div>
+	</main>
+
+	<footer>
+		
+		<div class="container"id="footer-wrap">
+			<div>
+				<h3>Online store</h3>
+				<ul>
+					<li><a href="#">Men clothing</a></li>
+					<li><a href="">Women clothing</a></li>
+					<li><a href="">Men accessories</a></li>
+					<li><a href="">Women accessories</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h3>Online store</h3>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Partners</h3>
+				<ul>
+					<li><a href="#">Zara</a></li>
+					<li><a href="#">Pantaloons</a></li>
+					<li><a href="#">Levis</a></li>
+					<li><a href="#">Ucb</a></li>
+					<li><a href="#">+ Many more</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Address</h3>
+				<ul>
+					<li><a href="#">Building 101</a></li>
+					<li><a href="#">Central Avenue</a></li>
+					<li><a href="#">LA - 902722</a></li>
+					<li><a href="#">United States</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
+
+	</footer>
+
+	<script type="text/javascript">
+		
+		var counterOfProducts = 0;
+		var topCounter = document.querySelector('#card span');
+
+		function findEl(productObj) {
+
+			var left = document.getElementById('left');
+			var right = document.getElementById('right');
+
+			var image = document.createElement('img');
+
+			var heading_1 = document.createElement('h1');
+			var text_1 = document.createTextNode(productObj.name);
+
+			var par1 = document.createElement('p');
+			var par2 = document.createElement('p');
+			var span = document.createElement('span');
+			par1.className = "desc";
+			par2.className = "price";
+			var par1Text = document.createTextNode(productObj.brand);
+			var par2Text = document.createTextNode(productObj.price);
+			var spanText = document.createTextNode("Price: Rs ");
+			span.appendChild(spanText);
+
+			var par3 = document.createElement('p');
+			par3.className = "desc";
+			var par3Text = document.createTextNode(productObj.description);
+
+			var heading_3 = document.createElement('h3');
+			var text_3 = document.createTextNode('Description');
+			heading_3.appendChild(text_3);
+
+			var heading_3_1 = document.createElement('h3');
+			var text_3_1 = document.createTextNode('Product review');
+			heading_3_1.appendChild(text_3_1);
+
+			var btn = document.createElement('button');
+			btn.innerHTML = "Add to Cart";
+	
+			var str = location.search;
+			var id = str.substr(str.indexOf("=")+1, str.length-str.indexOf("="));
+
+			if (id === productObj.id) {
+
+				document.title = productObj.name;
+
+				image.src = productObj.preview;
+				left.appendChild(image);
+
+				heading_1.appendChild(text_1);
+
+				par1.appendChild(par1Text);
+				par2.appendChild(span);
+				par2.appendChild(par2Text);
+				par3.appendChild(par3Text);
+				right.appendChild(heading_1);
+				right.appendChild(par1);
+				right.appendChild(par2);
+				right.appendChild(heading_3);
+				right.appendChild(par3);
+				right.appendChild(heading_3_1);
+
+			let i=0;
+
+			while (i<productObj.photos.length) {
+
+				var review_img = document.createElement('img');
+				review_img.src = productObj.photos[i];
+				review_img.className = 'review';
+				right.appendChild(review_img);
+				
+				i++;
+			}
+
+			right.appendChild(btn);
+
+			btn.addEventListener('click', function () {
+				var counterOfClicks = Number (topCounter.innerHTML);
+				counterOfClicks ++;
+				topCounter.innerHTML = counterOfClicks;
+				topCounter.setAttribute('id', 'counter');
+
+				let http = new XMLHttpRequest();
+
+				http.open('POST', 'https://5d76bf96515d1a0014085cf9.mockapi.io/order', true);
+				http.onreadystatechange = function() {
+					if (this.readyState === 4) {
+						if (this.status === 201) {
+							let response = JSON.parse (this.responseText);
+							
+
+						} else console.log ('Call failed');
+					}
+				}
+
+				counterOfProducts++;
+
+				var obj = {
+					"id":productObj.id,
+					"title":productObj.name,
+					"thumbnail": productObj.preview,
+					"amount": productObj.price,
+					"count": counterOfProducts,
+					"products":[]
+				};
+
+				obj = JSON.stringify(obj);
+				http.send(obj);
+
+				window.localStorage.setItem("id_"+productObj.id, obj);
+
+			});
+
+			var thumb = document.querySelectorAll('.review');
+
+			console.log(thumb);
+
+			thumb[0].classList.toggle("review-active");
+
+			for (let i=0; i<thumb.length; i++) {
+				thumb[i].addEventListener('click', function() {
+					image.src = thumb[i].src;
+					var current = document.getElementsByClassName("review-active");
+					current[0].className = current[0].className.replace(" review-active", "");
+					thumb[i].className += " review-active";
+				})
+			}
+
+			}
+
+			// var review_img = document.querySelectorAll('#right img');
+			// console.log(image.src)
+
+			// for ( var i = 0; i < review_img.length; i++)
+			// {
+			//     review_img[i].addEventListener("click", function(){
+			//       image.src = review_img.src;
+
+			//    });
+			// }
+
+		}
+
+		function getData() {
+			let http = new XMLHttpRequest();
+
+			http.onreadystatechange = function() {
+				if (this.readyState === 4) {
+					if (this.status === 200) {
+						var productObj = JSON.parse (this.responseText);
+						for (var i=0; i<productObj.length; i++) {
+							findEl(productObj[i]);
+						}
+					} else console.log ('Call failed');
+				}
+			}
+
+			http.open('GET', 'https://5d76bf96515d1a0014085cf9.mockapi.io/product', true);
+			http.send();	
+		}
+
+		getData();
+			
+			let totalCount = 0;
+
+			for (let i=0;i<localStorage.length; i++) {
+				let key = localStorage.key(i);
+				let obj = JSON.parse(localStorage.getItem(key));
+				totalCount += obj.count;
+				
+				let topCounter = document.querySelector('#card span');
+				if (totalCount > 0) {
+					topCounter.setAttribute('id', 'counter');
+					topCounter.innerHTML = totalCount;
+				} else topCounter.removeAttribute('id');
+
+			}
+
+	</script>
+</body>
+</html>

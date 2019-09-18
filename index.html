@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://kit.fontawesome.com/4326f6cda5.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<title>E-commerce</title>
+</head>
+<body>
+	<header>
+		<div class="container" id="header-wrap">
+
+			<div id="header-left">
+				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
+				<nav id="top-menu">
+					<ul>
+						<li><a href="#clothes-heading">Clothing</a></li>
+						<li><a href="#accessories-heading">Accessories</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div id="header-right">
+				<form>
+					<i class="fas fa-search"></i>
+					<input type="search" name="search" placeholder="Search for Clothing and Accessories">
+				</form>
+				<div id="card">
+					<a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
+					<img id="avatar" src="img/avatar.jpg">
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		
+		<div class="container">
+			<div class="owl-carousel owl-theme">
+				<div>
+					<img src="img/1.png" alt="Banner №1">
+				</div>
+				<div>
+					<img src="img/2.png" alt="Banner №2">
+				</div>
+				<div>
+					<img src="img/3.png" alt="Banner №3">
+				</div>
+
+			</div>
+
+			<div id="products">
+				
+				<h1 id="clothes-heading">Clothing for Men and Women</h1>
+
+				<div id="clothes"></div>
+
+				<h2 id="accessories-heading">Accessories for Men and Women</h2>
+
+				<div id="accessories"></div>
+			</div>
+		</div>
+
+	</main>
+
+	<footer>
+		
+		<div class="container"id="footer-wrap">
+			<div>
+				<h3>Online store</h3>
+				<ul>
+					<li><a href="#">Men clothing</a></li>
+					<li><a href="">Women clothing</a></li>
+					<li><a href="">Men accessories</a></li>
+					<li><a href="">Women accessories</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h3>Online store</h3>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Partners</h3>
+				<ul>
+					<li><a href="#">Zara</a></li>
+					<li><a href="#">Pantaloons</a></li>
+					<li><a href="#">Levis</a></li>
+					<li><a href="#">Ucb</a></li>
+					<li><a href="#">+ Many more</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Address</h3>
+				<ul>
+					<li><a href="#">Building 101</a></li>
+					<li><a href="#">Central Avenue</a></li>
+					<li><a href="#">LA - 902722</a></li>
+					<li><a href="#">United States</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</footer>
+
+	<script type="text/javascript" src="js/script.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$(".owl-carousel").owlCarousel({
+				items: 1,
+				autoplay: true,
+				loop: true,
+				nav: true,
+				responsive: {
+					0: {
+						nav: false
+					},
+
+					900: {
+						nav: true
+					}
+				}
+			});
+
+		});
+
+	// var topAnchor = document.querySelectorAll('#top-menu a');
+
+	// for (let i=0; i<topAnchor.length; i++) {
+	// 	topAnchor[i].addEventListener('click', function(e) {
+	// 		e.preventDefault();
+	// 	})
+	// }
+
+	// console.log(topAnchor)
+
+	let totalCount = 0;
+
+for (let i=0;i<localStorage.length; i++) {
+	let key = localStorage.key(i);
+	let obj = JSON.parse(localStorage.getItem(key));
+	totalCount += obj.count;
+
+	let topCounter = document.querySelector('#card span');
+	if (totalCount > 0) {
+		topCounter.setAttribute('id', 'counter');
+		topCounter.innerHTML = totalCount;
+	} else topCounter.removeAttribute('id');
+
+}
+
+	</script>
+
+<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
+</body>
+</html>

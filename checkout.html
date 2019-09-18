@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://kit.fontawesome.com/4326f6cda5.js"></script>
+
+	<title>Checkout</title>
+</head>
+<body>
+	<header>
+		<div class="container" id="header-wrap">
+
+			<div id="header-left">
+				<div id="logo"><a href="index.html">Shop<span>lane</span></a></div>
+				<nav id="top-menu">
+					<ul>
+						<li><a href="clothing.html#clothes-heading">Clothing</a></li>
+						<li><a href="accessories.html#accessories-heading">Accessories</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div id="header-right">
+				<form>
+					<i class="fas fa-search"></i>
+					<input type="search" name="search" placeholder="Search for Clothing and Accessories">
+				</form>
+				<div id="card">
+					<a href="#"><i class="fas fa-cart-arrow-down" ><span id="counter"></span></i></a>
+					<img id="avatar" src="img/avatar.jpg">
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		
+		<div class="container" id="checkout">
+			<h1>Checkout</h1>
+			<p id="total-items">Total items: </p>
+
+			<div id="kindablock">
+				<div id="left-check">
+				</div>
+				<div id="right-check">
+					<div id="total">
+						<h2>Total amount</h2>
+						<p class="desc">Total price: <span></span></p>
+						<a href="thank.html" onclick="localStorage.clear();"><button>Place Order</button></a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</main>
+
+	<footer>
+		
+		<div class="container"id="footer-wrap">
+			<div>
+				<h3>Online store</h3>
+				<ul>
+					<li><a href="#">Men clothing</a></li>
+					<li><a href="">Women clothing</a></li>
+					<li><a href="">Men accessories</a></li>
+					<li><a href="">Women accessories</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h3>Online store</h3>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Partners</h3>
+				<ul>
+					<li><a href="#">Zara</a></li>
+					<li><a href="#">Pantaloons</a></li>
+					<li><a href="#">Levis</a></li>
+					<li><a href="#">Ucb</a></li>
+					<li><a href="#">+ Many more</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Address</h3>
+				<ul>
+					<li><a href="#">Building 101</a></li>
+					<li><a href="#">Central Avenue</a></li>
+					<li><a href="#">LA - 902722</a></li>
+					<li><a href="#">United States</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
+
+		<script type="text/javascript">
+
+			let checkout = document.getElementById("checkout");
+			var sum = 0;
+			var totalCount = 0;
+
+			for (let i=0;i<localStorage.length; i++) {
+				let key = localStorage.key(i);
+				let obj = JSON.parse(localStorage.getItem(key));
+
+				let left = document.getElementById("left-check");
+				let item = document.createElement('div');
+				item.className = "item";
+
+				let img = document.createElement('img');
+				img.src = obj.thumbnail;
+				item.appendChild(img);
+
+				let heading = document.createElement('h4');
+				headingText = document.createTextNode(obj.title);
+				heading.appendChild(headingText);
+				item.appendChild(heading);
+
+				let countText = "";
+				let countPar = document.createElement('p');
+
+				if (obj.count>1) {
+					countText = document.createTextNode("x"+obj.count);
+					countPar.appendChild(countText);
+					item.appendChild(countPar);
+				}
+
+				let par1 = document.createElement('p');
+				par1.className="desc";
+				let par1Text = document.createTextNode('Amount: Rs ' + obj.amount);
+				par1.appendChild(par1Text);
+				item.appendChild(par1);
+
+				left.appendChild(item);
+
+				let total = document.querySelector('#total span');
+				sum+=obj.amount*obj.count;
+				total.innerHTML = sum;
+
+				totalCount += obj.count;
+			}
+
+			let topCounter = document.querySelector('#card span');
+			if (totalCount > 0) {
+				topCounter.setAttribute('id', 'counter');
+				topCounter.innerHTML = totalCount;
+			} else topCounter.removeAttribute('id');
+
+
+			let totalItems = document.getElementById('total-items');
+			if (totalCount > 0) {
+				totalItems.innerHTML += totalCount;
+			}
+
+
+		</script>
+
+	</footer>
+
+</body>
+</html>
