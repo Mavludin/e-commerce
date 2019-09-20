@@ -112,7 +112,9 @@
 			</div>
 		</div>
 
+
 	</footer>
+	<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
 
 	<script type="text/javascript" src="js/script.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
@@ -137,35 +139,46 @@
 				}
 			});
 
+			var headerHeight = $('header').css('height');
+			$('main').css('margin-top', headerHeight);
+
+			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
+
+			$("#top-menu a:first").click(function() {
+			    $('html,body').animate({
+			        scrollTop: $("#clothes-heading").offset().top-headerHeight},
+			        'slow');
+			});
+
+			$("#top-menu a:last").click(function() {
+			    $('html,body').animate({
+			        scrollTop: $("#accessories-heading").offset().top-headerHeight},
+			        'slow');
+			});
+
 		});
-
-	// var topAnchor = document.querySelectorAll('#top-menu a');
-
-	// for (let i=0; i<topAnchor.length; i++) {
-	// 	topAnchor[i].addEventListener('click', function(e) {
-	// 		e.preventDefault();
-	// 	})
-	// }
-
-	// console.log(topAnchor)
 
 	let totalCount = 0;
 
-for (let i=0;i<localStorage.length; i++) {
-	let key = localStorage.key(i);
-	let obj = JSON.parse(localStorage.getItem(key));
-	totalCount += obj.count;
+	for (let i=0;i<localStorage.length; i++) {
+		let key = localStorage.key(i);
+		let obj = JSON.parse(localStorage.getItem(key));
+		totalCount += obj.count;
 
-	let topCounter = document.querySelector('#card span');
-	if (totalCount > 0) {
-		topCounter.setAttribute('id', 'counter');
-		topCounter.innerHTML = totalCount;
-	} else topCounter.removeAttribute('id');
+		let topCounter = document.querySelector('#card span');
+		if (totalCount > 0) {
+			topCounter.setAttribute('id', 'counter');
+			topCounter.innerHTML = totalCount;
+		} else topCounter.removeAttribute('id');
+	}
 
-}
+	var header = document.querySelector('header');
+	var headerHeight = window.getComputedStyle(header).height;
+	
+	var main = document.querySelector('main');
+	main.style.marginTop = headerHeight;
 
 	</script>
 
-<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
 </body>
 </html>

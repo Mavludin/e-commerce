@@ -19,7 +19,7 @@
 				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
 				<nav id="top-menu">
 					<ul>
-						<li><a href="index.html#clothes-heading">Clothing</a></li>
+						<li><a href="#">Clothing</a></li>
 						<li><a href="index.html#accessories-heading">Accessories</a></li>
 					</ul>
 				</nav>
@@ -175,18 +175,18 @@
 				topCounter.innerHTML = counterOfClicks;
 				topCounter.setAttribute('id', 'counter');
 
-				let http = new XMLHttpRequest();
+				// let http = new XMLHttpRequest();
 
-				http.open('POST', 'https://5d76bf96515d1a0014085cf9.mockapi.io/order', true);
-				http.onreadystatechange = function() {
-					if (this.readyState === 4) {
-						if (this.status === 201) {
-							let response = JSON.parse (this.responseText);
+				// http.open('POST', 'https://5d76bf96515d1a0014085cf9.mockapi.io/order', true);
+				// http.onreadystatechange = function() {
+				// 	if (this.readyState === 4) {
+				// 		if (this.status === 201) {
+				// 			let response = JSON.parse (this.responseText);
 							
 
-						} else console.log ('Call failed');
-					}
-				}
+				// 		} else console.log ('Call failed');
+				// 	}
+				// }
 
 				counterOfProducts++;
 
@@ -200,7 +200,7 @@
 				};
 
 				obj = JSON.stringify(obj);
-				http.send(obj);
+				// http.send(obj);
 
 				window.localStorage.setItem("id_"+productObj.id, obj);
 
@@ -271,6 +271,34 @@
 
 			}
 
+			var header = document.querySelector('header');
+			var headerHeight = window.getComputedStyle(header).height;
+			
+			var main = document.querySelector('main');
+			main.style.marginTop = headerHeight;
+
+
+	</script>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+
+			var headerHeight = $('header').css('height');
+			$('main').css('margin-top', headerHeight);
+			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
+
+
+			$("#top-menu a:first").click(function() {
+
+				window.open("index.html", "_self");
+				window.setTimeout(function() {
+				    $('html,body').animate({
+				        scrollTop: $("#clothes-heading").offset().top-headerHeight},
+				        'slow');
+				}, 1000);
+			});
+		});
 	</script>
 </body>
 </html>
