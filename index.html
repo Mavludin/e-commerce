@@ -72,7 +72,7 @@
 
 	<footer>
 		
-		<div class="container"id="footer-wrap">
+		<div class="container" id="footer-wrap">
 			<div>
 				<h3>Online store</h3>
 				<ul>
@@ -140,8 +140,7 @@
 			});
 
 			var headerHeight = $('header').css('height');
-			$('main').css('margin-top', headerHeight);
-
+      $('main').css('margin-top', headerHeight);
 			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
 
 			$("#top-menu a:first").click(function() {
@@ -171,12 +170,6 @@
 			topCounter.innerHTML = totalCount;
 		} else topCounter.removeAttribute('id');
 	}
-
-	var header = document.querySelector('header');
-	var headerHeight = window.getComputedStyle(header).height;
-	
-	var main = document.querySelector('main');
-	main.style.marginTop = headerHeight;
 
 	</script>
 
