@@ -48,7 +48,7 @@
 
 	<footer>
 		
-		<div class="container"id="footer-wrap">
+		<div class="container" id="footer-wrap">
 			<div>
 				<h3>Online store</h3>
 				<ul>
@@ -92,15 +92,17 @@
 
 	</footer>
 
-<script type="text/javascript">
-	
-	var header = document.querySelector('header');
-	var headerHeight = window.getComputedStyle(header).height;
-	
-	var main = document.querySelector('main');
-	main.style.marginTop = headerHeight;
+  	<script type="text/javascript">
 
-</script>
+	      $(document).ready(function() {
 
+		var headerHeight = $('header').css('height');
+		headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
+		$('main').css('margin-top', headerHeight+10+"px");
+
+	      });
+
+	</script>
+  
 </body>
 </html>
