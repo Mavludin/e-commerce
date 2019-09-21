@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<script src="https://kit.fontawesome.com/4326f6cda5.js"></script>
+ 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 	<title>Details</title>
 </head>
@@ -48,7 +49,7 @@
 
 	<footer>
 		
-		<div class="container"id="footer-wrap">
+		<div class="container" id="footer-wrap">
 			<div>
 				<h3>Online store</h3>
 				<ul>
@@ -91,6 +92,27 @@
 		<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
 
 	</footer>
+  
+  	<script type="text/javascript">
+		
+		$(document).ready(function() {
+
+			var headerHeight = $('header').css('height');
+			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
+      $('main').css('margin-top', headerHeight+20+"px");
+
+
+			$("#top-menu a:first").click(function() {
+
+				window.open("index.html", "_self");
+				window.setTimeout(function() {
+				    $('html,body').animate({
+				        scrollTop: $("#clothes-heading").offset().top-headerHeight},
+				        'slow');
+				}, 1000);
+			});
+		});
+	</script>
 
 	<script type="text/javascript">
 		
@@ -271,34 +293,7 @@
 
 			}
 
-			var header = document.querySelector('header');
-			var headerHeight = window.getComputedStyle(header).height;
-			
-			var main = document.querySelector('main');
-			main.style.marginTop = headerHeight;
-
-
 	</script>
 
-	<script type="text/javascript">
-		
-		$(document).ready(function() {
-
-			var headerHeight = $('header').css('height');
-			$('main').css('margin-top', headerHeight);
-			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
-
-
-			$("#top-menu a:first").click(function() {
-
-				window.open("index.html", "_self");
-				window.setTimeout(function() {
-				    $('html,body').animate({
-				        scrollTop: $("#clothes-heading").offset().top-headerHeight},
-				        'slow');
-				}, 1000);
-			});
-		});
-	</script>
 </body>
 </html>
