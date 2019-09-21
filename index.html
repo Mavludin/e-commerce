@@ -140,8 +140,9 @@
 			});
 
 			var headerHeight = $('header').css('height');
+      
 			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
-			$('main').css('margin-top', headerHeight+10+"px");
+      $('main').css('margin-top', headerHeight+20+"px");
 
 			$("#top-menu a:first").click(function() {
 			    $('html,body').animate({
