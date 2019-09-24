@@ -20,7 +20,7 @@
 				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
 				<nav id="top-menu">
 					<ul>
-						<li><a href="#">Clothing</a></li>
+						<li><a href="index.html#clothes-heading">Clothing</a></li>
 						<li><a href="index.html#accessories-heading">Accessories</a></li>
 					</ul>
 				</nav>
@@ -33,7 +33,7 @@
 				</form>
 				<div id="card">
 					<a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
-					<img id="avatar" src="img/avatar.jpg">
+					<img id="avatar" src="img/avatar.jpg" alt="Avatar">
 				</div>
 			</div>
 		</div>
@@ -92,26 +92,15 @@
 		<img id="edyoda-logo" src="https://i.imgur.com/OKAY6Fl.png" alt="Edyoda logo">
 
 	</footer>
-  
-  	<script type="text/javascript">
-		
+
+	<script type="text/javascript">
+
 		$(document).ready(function() {
 
 			var headerHeight = $('header').css('height');
-			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
-      $('main').css('margin-top', headerHeight+20+"px");
-
-
-			$("#top-menu a:first").click(function() {
-
-				window.open("index.html", "_self");
-				window.setTimeout(function() {
-				    $('html,body').animate({
-				        scrollTop: $("#clothes-heading").offset().top-headerHeight},
-				        'slow');
-				}, 1000);
-			});
-		});
+			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length - 2));
+			$('main').css('margin-top', headerHeight + 20 + "px");
+		})
 	</script>
 
 	<script type="text/javascript">
@@ -244,17 +233,6 @@
 			}
 
 			}
-
-			// var review_img = document.querySelectorAll('#right img');
-			// console.log(image.src)
-
-			// for ( var i = 0; i < review_img.length; i++)
-			// {
-			//     review_img[i].addEventListener("click", function(){
-			//       image.src = review_img.src;
-
-			//    });
-			// }
 
 		}
 

@@ -7,13 +7,26 @@ body {
 }
 
 header {
-	box-shadow: 0px 2px 10px #ccc;
+	box-shadow: 0 2px 10px #ccc;
 	position: fixed;
     z-index: 20;
     left: 0;
     top: 0;
     background-color: #fff;
     width: 100%;
+}
+
+#hamb {
+	display: none;
+	cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+	width: 35px;
+	height: 5px;
+	background-color: #333;
+	margin: 6px 0;
+	transition: 0.4s;
 }
 
 #header-left, #header-right {
@@ -158,10 +171,8 @@ h1, h2 {
 }
 
 figure {
-	margin: 0;
 	text-align: center;
 	box-shadow: 0 5px 10px #ccc;
-	margin: 10px;
 	display: inline-block;
 }
 
@@ -489,15 +500,46 @@ button {
 
 @media screen and (max-width: 600px) {
 
+	header .container{
+		padding: 0;
+	}
+
 	#header-wrap {
 		flex-flow: column;
 		align-items: center;
 	}
 
-	#header-left, #header-right {
-		width: 100%;
-		margin: 5px 0;
+	#hamb {
+		display: block;
 	}
+
+	#header-left {
+        display: none;
+	}
+
+	.change .bar1 {
+		-webkit-transform: rotate(-45deg) translate(-9px, 6px);
+		transform: rotate(-45deg) translate(-9px, 6px);
+	}
+
+	.change .bar2 {opacity: 0;}
+
+	.change .bar3 {
+		-webkit-transform: rotate(45deg) translate(-8px, -8px);
+		transform: rotate(45deg) translate(-8px, -8px);
+	}
+
+	.change #header-left {
+		display: flex;
+        width: 100%;
+        margin: 5px 0;
+	}
+
+    #header-right {
+        display: flex;
+        width: 100%;
+        margin: 5px 0;
+    }
 
 	#logo {
 		margin-bottom: 5px;
