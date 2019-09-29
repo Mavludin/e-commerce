@@ -8,36 +8,43 @@
 
 	<script src="https://kit.fontawesome.com/4326f6cda5.js"></script>
  	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 
 	<title>Details</title>
 </head>
 <body>
 
-	<header>
-		<div class="container" id="header-wrap">
+    <header>
+        <div class="container" id="header-wrap">
 
-			<div id="header-left">
-				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
-				<nav id="top-menu">
-					<ul>
-						<li><a href="index.html#clothes-heading">Clothing</a></li>
-						<li><a href="index.html#accessories-heading">Accessories</a></li>
-					</ul>
-				</nav>
-			</div>
+            <div id="hamb">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
 
-			<div id="header-right">
-				<form>
-					<i class="fas fa-search"></i>
-					<input type="search" name="search" placeholder="Search for Clothing and Accessories">
-				</form>
-				<div id="card">
-					<a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
-					<img id="avatar" src="img/avatar.jpg" alt="Avatar">
-				</div>
-			</div>
-		</div>
-	</header>
+            <div id="header-left">
+                <div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
+                <nav id="top-menu">
+                    <ul>
+                        <li><a href="index.html#clothes-heading">Clothing</a></li>
+                        <li><a href="index.html#accessories-heading">Accessories</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="header-right">
+                <form>
+                    <i class="fas fa-search"></i>
+                    <input type="search" name="search" placeholder="Search for Clothing and Accessories">
+                </form>
+                <div id="card">
+                    <a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
+                    <img id="avatar" src="img/avatar.jpg" alt="Avatar">
+                </div>
+            </div>
+        </div>
+    </header>
 
 	<main>
 
@@ -97,10 +104,14 @@
 
 		$(document).ready(function() {
 
+			setTimeout( () => {
+				$(".se-pre-con").fadeOut("slow");
+			}, 1000);
+
 			var headerHeight = $('header').css('height');
 			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length - 2));
 			$('main').css('margin-top', headerHeight + 20 + "px");
-		})
+		});
 	</script>
 
 	<script type="text/javascript">
@@ -108,7 +119,7 @@
 		var counterOfProducts = 0;
 		var topCounter = document.querySelector('#card span');
 
-		function findEl(productObj) {
+		const findEl = productObj => {
 
 			var left = document.getElementById('left');
 			var right = document.getElementById('right');
@@ -151,108 +162,103 @@
 				document.title = productObj.name;
 
 				image.src = productObj.preview;
-				left.appendChild(image);
 
+				if(window.matchMedia('(max-width: 900px)').matches){
+					left.appendChild(heading_1);
+				} else right.appendChild(heading_1);
+
+				left.appendChild(image);
 				heading_1.appendChild(text_1);
 
 				par1.appendChild(par1Text);
 				par2.appendChild(span);
 				par2.appendChild(par2Text);
 				par3.appendChild(par3Text);
-				right.appendChild(heading_1);
 				right.appendChild(par1);
 				right.appendChild(par2);
 				right.appendChild(heading_3);
 				right.appendChild(par3);
-				right.appendChild(heading_3_1);
 
-			let i=0;
+				let i=0;
+				let thumbCover = document.createElement('div');
+				thumbCover.id="thumb-cover";
+				thumbCover.appendChild(heading_3_1);
 
-			while (i<productObj.photos.length) {
+				while (i<productObj.photos.length) {
 
-				var review_img = document.createElement('img');
-				review_img.src = productObj.photos[i];
-				review_img.className = 'review';
-				right.appendChild(review_img);
-				
-				i++;
-			}
+					var review_img = document.createElement('img');
+					review_img.src = productObj.photos[i];
+					review_img.className = 'review';
+					thumbCover.appendChild(review_img);
 
-			right.appendChild(btn);
+					i++;
+				}
 
-			btn.addEventListener('click', function () {
-				var counterOfClicks = Number (topCounter.innerHTML);
-				counterOfClicks ++;
-				topCounter.innerHTML = counterOfClicks;
-				topCounter.setAttribute('id', 'counter');
+				right.appendChild(thumbCover);
+				right.appendChild(btn);
 
-				// let http = new XMLHttpRequest();
+				if(window.matchMedia('(max-width: 900px)').matches) {
+					right.insertBefore(thumbCover, right.firstChild);
+				}
 
-				// http.open('POST', 'https://5d76bf96515d1a0014085cf9.mockapi.io/order', true);
-				// http.onreadystatechange = function() {
-				// 	if (this.readyState === 4) {
-				// 		if (this.status === 201) {
-				// 			let response = JSON.parse (this.responseText);
-							
+				btn.addEventListener('click', function () {
+					var counterOfClicks = Number (topCounter.innerHTML);
+					counterOfClicks ++;
+					topCounter.innerHTML = counterOfClicks;
+					topCounter.setAttribute('id', 'counter');
 
-				// 		} else console.log ('Call failed');
-				// 	}
-				// }
+					counterOfProducts++;
 
-				counterOfProducts++;
+					var obj = {
+						"id":productObj.id,
+						"title":productObj.name,
+						"thumbnail": productObj.preview,
+						"amount": productObj.price,
+						"count": counterOfProducts,
+						"products":[]
+					};
 
-				var obj = {
-					"id":productObj.id,
-					"title":productObj.name,
-					"thumbnail": productObj.preview,
-					"amount": productObj.price,
-					"count": counterOfProducts,
-					"products":[]
-				};
+					obj = JSON.stringify(obj);
 
-				obj = JSON.stringify(obj);
-				// http.send(obj);
+					window.localStorage.setItem("id_"+productObj.id, obj);
 
-				window.localStorage.setItem("id_"+productObj.id, obj);
+				});
 
-			});
+				var thumb = document.querySelectorAll('.review');
 
-			var thumb = document.querySelectorAll('.review');
+				thumb[0].classList.toggle("review-active");
 
-			console.log(thumb);
-
-			thumb[0].classList.toggle("review-active");
-
-			for (let i=0; i<thumb.length; i++) {
-				thumb[i].addEventListener('click', function() {
-					image.src = thumb[i].src;
-					var current = document.getElementsByClassName("review-active");
-					current[0].className = current[0].className.replace(" review-active", "");
-					thumb[i].className += " review-active";
-				})
-			}
+				for (let i=0; i<thumb.length; i++) {
+					thumb[i].addEventListener('click', function() {
+						image.src = thumb[i].src;
+						var current = document.getElementsByClassName("review-active");
+						current[0].className = current[0].className.replace(" review-active", "");
+						thumb[i].className += " review-active";
+					});
+				}
 
 			}
 
-		}
+		};
 
-		function getData() {
+		const getData = () => {
+
 			let http = new XMLHttpRequest();
 
 			http.onreadystatechange = function() {
 				if (this.readyState === 4) {
 					if (this.status === 200) {
 						var productObj = JSON.parse (this.responseText);
-						for (var i=0; i<productObj.length; i++) {
-							findEl(productObj[i]);
-						}
+						productObj.map(item => {
+							findEl(item);
+						});
 					} else console.log ('Call failed');
 				}
-			}
+			};
 
 			http.open('GET', 'https://5d76bf96515d1a0014085cf9.mockapi.io/product', true);
-			http.send();	
-		}
+			http.send();
+		};
 
 		getData();
 			
@@ -271,7 +277,14 @@
 
 			}
 
+        $("#hamb").on( "click", function() {
+            $("#header-wrap").toggleClass("change");
+        });
+
 	</script>
 
 </body>
+
+<div class="se-pre-con"></div>
+
 </html>

@@ -22,10 +22,10 @@ header {
 }
 
 .bar1, .bar2, .bar3 {
-	width: 35px;
-	height: 5px;
+	width: 20px;
+	height: 3px;
 	background-color: #333;
-	margin: 6px 0;
+	margin: 4px 0;
 	transition: 0.4s;
 }
 
@@ -174,10 +174,13 @@ figure {
 	text-align: center;
 	box-shadow: 0 5px 10px #ccc;
 	display: inline-block;
+	margin: 0 10px 10px 0;
+	border-radius: 10px;
 }
 
 figure img {
 	width: 	100%;
+	border-radius: 10px;
 }
 
 figcaption {
@@ -266,6 +269,7 @@ footer a:hover {
 
 #left img {
 	width: 300px;
+	border-radius: 10px;
 }
 
 #right {
@@ -316,6 +320,11 @@ button {
     cursor: pointer;
     font-family: 'Lato', sans-serif;
     font-size: 1em;
+	transition: 0.2s;
+}
+
+button:hover {
+	background-color: #3a99fb;
 }
 
 #kindablock {
@@ -371,6 +380,15 @@ button {
 	border-radius: 5px;
 }
 
+#checkout .item {
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+#checkout .item:hover {
+	background-color: #eaeaea;
+}
+
 #left-check .desc {
 	margin-bottom: 0;
 }
@@ -389,6 +407,17 @@ button {
 	margin-bottom: 10px;
 }
 
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('https://i.imgur.com/dLtxxJt.gif') center no-repeat #fff;
+}
 
 @media screen and (max-width: 900px) {
 	#header-left {
@@ -413,6 +442,10 @@ button {
 		font-size: 1.8em;
 	}
 
+	#details h1 {
+		margin-bottom: 20px;
+	}
+
 	#clothes, #accessories {
 		flex-wrap: wrap;
 		justify-content: space-around;
@@ -420,7 +453,6 @@ button {
 
 	figure {
 		width: 22%;
-		margin: 0 10px 10px 0;
 	}
 
 	#footer-wrap div {
@@ -440,9 +472,25 @@ button {
 		width: 12%
 	}
 
+	#left img {
+		width: 200px;
+	}
+
+	.review {
+		width: 50px;
+	}
+
 	#details {
 		flex-wrap: wrap;
 		text-align: center;
+	}
+
+	#details h3{
+		margin: 0;
+	}
+
+	#details .desc {
+		margin: 10px 0;
 	}
 
 	#details .desc:last-of-type {
@@ -514,25 +562,28 @@ button {
 	}
 
 	#header-left {
-        display: none;
+		opacity: 0;
+		height: 0;
+		overflow: hidden;
+		transition: opacity 1s ease-out;
 	}
 
 	.change .bar1 {
-		-webkit-transform: rotate(-45deg) translate(-9px, 6px);
-		transform: rotate(-45deg) translate(-9px, 6px);
+		-webkit-transform: rotate(-45deg) translate(-5px, 5px);
+		transform: rotate(-45deg) translate(-5px, 5px);
 	}
 
 	.change .bar2 {opacity: 0;}
 
 	.change .bar3 {
-		-webkit-transform: rotate(45deg) translate(-8px, -8px);
-		transform: rotate(45deg) translate(-8px, -8px);
+		-webkit-transform: rotate(45deg) translate(-4px, -6px);
+		transform: rotate(45deg) translate(-4px, -6px);
 	}
 
 	.change #header-left {
-		display: flex;
-        width: 100%;
-        margin: 5px 0;
+		opacity: 1;
+		height: auto;
+		overflow: visible;
 	}
 
     #header-right {
@@ -559,13 +610,21 @@ button {
 		width: 90%;
 	}
 
+	form {
+		width: 250px;
+	}
+
+	form input {
+		font-size: 0.8em;
+	}
+
 
 }
 
 @media screen and (max-width: 414px) {
 
-	form {
-		width: 275px;
+	#logo a {
+		font-size: 1.5em;
 	}
 
 	input {

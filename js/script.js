@@ -1,4 +1,4 @@
-function newElement(productObj) {
+const newElement = productObj => {
 
 	var clothes = document.getElementById('clothes');
 	var accessories = document.getElementById('accessories');
@@ -34,24 +34,24 @@ function newElement(productObj) {
 		if (productObj.isAccessory === false) clothes.appendChild(figure);
 		if (productObj.isAccessory === true) accessories.appendChild(figure);
 	}
-}
+};
 
-function getData() {
+const getData = () => {
 	var http = new XMLHttpRequest();
 
 	http.onreadystatechange = function() {
 		if (this.readyState === 4) {
 			if (this.status === 200) {
 				var productObj = JSON.parse (this.responseText);
-				for (var i=0; i<productObj.length; i++) {
-					newElement(productObj[i]);
-				}
+					productObj.map (item => {
+						newElement(item);
+					});
 			} else console.log ('Call failed');
 		}
-	}
+	};
 
 	http.open('GET', 'https://5d76bf96515d1a0014085cf9.mockapi.io/product', true);
 	http.send();	
-}
+};
 
 getData();

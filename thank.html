@@ -11,8 +11,15 @@
 	<title>Confirmation page</title>
 </head>
 <body>
+
 	<header>
 		<div class="container" id="header-wrap">
+
+			<div id="hamb">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
 
 			<div id="header-left">
 				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
@@ -31,7 +38,7 @@
 				</form>
 				<div id="card">
 					<a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
-					<img id="avatar" src="img/avatar.jpg">
+					<img id="avatar" src="img/avatar.jpg" alt="Avatar">
 				</div>
 			</div>
 		</div>
@@ -97,9 +104,13 @@
 
 	      $(document).ready(function() {
 
-		var headerHeight = $('header').css('height');
-		headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
-		$('main').css('margin-top', headerHeight+20+"px");
+			var headerHeight = $('header').css('height');
+			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
+			$('main').css('margin-top', headerHeight+20+"px");
+
+			$("#hamb").on( "click", function() {
+				$("#header-wrap").toggleClass("change");
+			});
 
 	      });
 

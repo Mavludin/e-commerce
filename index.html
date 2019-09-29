@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="https://kit.fontawesome.com/4326f6cda5.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
 
 	<title>E-commerce</title>
 </head>
@@ -129,6 +130,10 @@
 
 		$(document).ready(function() {
 
+			setTimeout( () => {
+				$(".se-pre-con").fadeOut("slow");
+			}, 1000);
+
 			$(".owl-carousel").owlCarousel({
 				items: 1,
 				autoplay: true,
@@ -145,46 +150,69 @@
 				}
 			});
 
-			var headerHeight = $('header').css('height');
+			let headerHeight = $('header').css('height');
       
 			headerHeight = Math.floor(headerHeight.substr(-headerHeight.length, headerHeight.length-2));
       		$('main').css('margin-top', headerHeight+20+"px");
 
-			$("#top-menu a:first").click(function() {
+			$("#top-menu a:first").click(function(e) {
 			    $('html,body').animate({
-			        scrollTop: $("#clothes-heading").offset().top-headerHeight},
-			        'slow');
+			        scrollTop: $("#clothes-heading").offset().top-headerHeight}, 'slow');
+				e.preventDefault();
 			});
 
-			$("#top-menu a:last").click(function() {
+			$("#top-menu a:last").click(function(e) {
 			    $('html,body').animate({
-			        scrollTop: $("#accessories-heading").offset().top-headerHeight},
-			        'slow');
+			        scrollTop: $("#accessories-heading").offset().top-headerHeight}, 'slow');
+				e.preventDefault();
 			});
+
+			if (window.location.hash === "#clothes-heading") {
+				let dataLoadCheckService = setInterval(function() {
+					if($('#clothes').children().length > 0) {
+						$('html,body').animate({
+							scrollTop: $("#clothes-heading").offset().top-headerHeight}, 'slow');
+						history.pushState("", document.title, window.location.pathname + window.location.search);
+						clearInterval(dataLoadCheckService);
+					}
+				}, 1100);
+
+			}
+
+			if (window.location.hash === "#accessories-heading") {
+				let dataLoadCheckService = setInterval(function() {
+					if($('#accessories').children().length > 0) {
+						$('html,body').animate({
+							scrollTop: $("#accessories-heading").offset().top-headerHeight}, 'slow');
+						history.pushState("", document.title, window.location.pathname + window.location.search);
+						clearInterval(dataLoadCheckService);
+					}
+				}, 1100);
+			}
 
 		});
 
-	let totalCount = 0;
+		let totalCount = 0;
 
-	for (let i=0;i<localStorage.length; i++) {
-		let key = localStorage.key(i);
-		let obj = JSON.parse(localStorage.getItem(key));
-		totalCount += obj.count;
+		for (let i=0;i<localStorage.length; i++) {
+			let key = localStorage.key(i);
+			let obj = JSON.parse(localStorage.getItem(key));
+			totalCount += obj.count;
 
-		let topCounter = document.querySelector('#card span');
-		if (totalCount > 0) {
-			topCounter.setAttribute('id', 'counter');
-			topCounter.innerHTML = totalCount;
-		} else topCounter.removeAttribute('id');
-	}
+			let topCounter = document.querySelector('#card span');
+			if (totalCount > 0) {
+				topCounter.setAttribute('id', 'counter');
+				topCounter.innerHTML = totalCount;
+			} else topCounter.removeAttribute('id');
+		}
 
-	let hamb = document.getElementById('hamb');
-	let headerWrap = document.getElementById('header-wrap');
-	hamb.onclick = function() {
-		headerWrap.classList.toggle("change");
-	}
+		$("#hamb").on( "click", function() {
+			$("#header-wrap").toggleClass("change");
+		});
 
 	</script>
 
 </body>
+
+<div class="se-pre-con"></div>
 </html>

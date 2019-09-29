@@ -11,15 +11,22 @@
 	<title>Checkout</title>
 </head>
 <body>
+
 	<header>
 		<div class="container" id="header-wrap">
 
+			<div id="hamb">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
+
 			<div id="header-left">
-				<div id="logo"><a href="index.html">Shop<span>lane</span></a></div>
+				<div id="logo"><a href="index.html">Shop<span>Lane</span></a></div>
 				<nav id="top-menu">
 					<ul>
-						<li><a href="clothing.html#clothes-heading">Clothing</a></li>
-						<li><a href="accessories.html#accessories-heading">Accessories</a></li>
+						<li><a href="index.html#clothes-heading">Clothing</a></li>
+						<li><a href="index.html#accessories-heading">Accessories</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -30,8 +37,8 @@
 					<input type="search" name="search" placeholder="Search for Clothing and Accessories">
 				</form>
 				<div id="card">
-					<a href="#"><i class="fas fa-cart-arrow-down" ><span id="counter"></span></i></a>
-					<img id="avatar" src="img/avatar.jpg">
+					<a href="checkout.html"><i class="fas fa-cart-arrow-down" ><span></span></i></a>
+					<img id="avatar" src="img/avatar.jpg" alt="Avatar">
 				</div>
 			</div>
 		</div>
@@ -127,7 +134,6 @@
 
 		<script type="text/javascript">
 
-			let checkout = document.getElementById("checkout");
 			var sum = 0;
 			var totalCount = 0;
 
@@ -138,29 +144,26 @@
 				let left = document.getElementById("left-check");
 				let item = document.createElement('div');
 				item.className = "item";
+				item.id = `item-${obj.id}`;
 
 				let img = document.createElement('img');
 				img.src = obj.thumbnail;
 				item.appendChild(img);
 
 				let heading = document.createElement('h4');
-				headingText = document.createTextNode(obj.title);
-				heading.appendChild(headingText);
+				heading.innerHTML = obj.title;
 				item.appendChild(heading);
 
-				let countText = "";
 				let countPar = document.createElement('p');
 
 				if (obj.count>1) {
-					countText = document.createTextNode("x"+obj.count);
-					countPar.appendChild(countText);
+					countPar.innerHTML = `x${obj.count}`;
 					item.appendChild(countPar);
 				}
 
 				let par1 = document.createElement('p');
 				par1.className="desc";
-				let par1Text = document.createTextNode('Amount: Rs ' + obj.amount);
-				par1.appendChild(par1Text);
+				par1.innerHTML = `Amount: Rs ${obj.amount}`;
 				item.appendChild(par1);
 
 				left.appendChild(item);
@@ -170,6 +173,14 @@
 				total.innerHTML = sum;
 
 				totalCount += obj.count;
+
+				item.onclick = () => {
+					if (item.id.substr(5,) == obj.id) {
+						console.log(item.id.substr(5,));
+						window.open(`details.html?product-id=${obj.id}`,"_self");
+
+					}
+				}
 			}
 
 			let topCounter = document.querySelector('#card span');
@@ -183,6 +194,10 @@
 			if (totalCount > 0) {
 				totalItems.innerHTML += totalCount;
 			}
+
+			$("#hamb").on( "click", function() {
+				$("#header-wrap").toggleClass("change");
+			});
 
 		</script>
 
