@@ -114,6 +114,12 @@
 
 	      });
 
+		  $(window).scroll(function () {
+			  if ( $(this).scrollTop() > 0 ) {
+				  $('header').css('box-shadow', '0 2px 10px #ccc');
+			  } else $('header').css('box-shadow', 'none');
+		  });
+
 	</script>
   
 </body>

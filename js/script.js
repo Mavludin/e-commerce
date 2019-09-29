@@ -16,14 +16,11 @@ const newElement = productObj => {
 		image.src = productObj.preview;
 		cardLink.href = "details.html?product-id=" + productObj.id;
 		cardLink.appendChild(image);
-		var text = document.createTextNode(productObj.name);
-		heading.appendChild(text);
+		heading.innerHTML = productObj.name;
 		par1.className = "desc";
 		par2.className = "price";
-		var par1Text = document.createTextNode(productObj.brand);
-		var par2Text = document.createTextNode(productObj.price);
-		par1.appendChild(par1Text);
-		par2.appendChild(par2Text);
+		par1.innerHTML = productObj.brand;
+		par2.innerHTML = productObj.price;
 
 		figure.appendChild(cardLink);
 		figure.appendChild(figcaption);
