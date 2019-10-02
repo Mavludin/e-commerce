@@ -133,9 +133,12 @@
 
 		$(document).ready(function() {
 
-			setTimeout( () => {
-				$(".se-pre-con").fadeOut("slow");
-			}, 1000);
+			$(window).on('load', function() {
+				var pre_loader = $('.se-pre-con');
+				pre_loader.fadeOut('slow', function() {
+					$(this).remove();
+				});
+			});
 
 			$(".owl-carousel").owlCarousel({
 				items: 1,
